@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Kucing</title>
+  <style>
+    /* CSS untuk tampilan animasi loading */
+    body, html {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    #loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .cat {
+      width: 100px;
+      height: 100px;
+      background-image: url('cat-walking.gif.gif'); /* URL gambar kucing */
+      background-size: cover;
+      animation: walk 1s steps(4) infinite;
+    }
+
+    @keyframes walk {
+      from { background-position: 0px; }
+      to { background-position: -400px; }
+    }
+
+    .popup, .warning-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .warning-page {
+      background-color: red;
+    }
+
+    .popup-content {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button.red {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading">
+    <div class="cat"></div>
+    <p>Loading...</p>
+  </div>
+
+  <!-- Popups -->
+  <div id="popup1" class="popup">
+    <div class="popup-content">
+      <p>Apakah benar kamu Petya Marlene?</p>
+      <button class="button" onclick="answerYes()">Iya</button>
+      <button class="button red" onclick="showWarning()">Tidak</button>
+    </div>
+  </div>
+
+  <div id="popup2" class="popup">
+    <div class="popup-content">
+      <p>hai petya, hehehe. gue jaleon, how's your day? Panas banget ya hari ini? Kasian cewek secantik ini kepanasan, meleleh dipanggang bumi. I just want to tell you something, meeting you is like abstract art displayed in an art gallery. I can't describe it, how it's feel, how it's be, and how beautiful you are. Semuanya cuma nampak goresan gak jelas yang membentuk suatu cerita, cerita yang entah gimana dimulai dan nanti berjalan</p>
+      <button class="button" onclick="nextPopup('popup3')">Oke, terus?</button>
+    </div>
+  </div>
+
+  <div id="popup3" class="popup">
+    <div class="popup-content">
+      <p>Biasanya gue mudah menyusun kata-kata, tapi sekarang saking susahnya gue sampai buka leptop buat nulis kode program buat menyampaikan ini ke kamu, Pet. Hehehe kok kamu ANEH GAK SIH?</p>
+      <button class="button" onclick="nextPopup('popup4A')">aneh</button>
+      <button class="button" onclick="nextPopup('popup4B')">enggak</button>
+    </div>
+  </div>
+
+  <div id="popup4A" class="popup">
+    <div class="popup-content">
+      <p>Yaudah pakai lo gue lagi aja, gue nyaman bareng-bareng sama lo akhir-akhir ini. Lo notis gak sih pet pas gue tanyain di base petrels waktu itu? Wkwkwk buat memastikan kalau lo mungkin bisa gue gandeng suatu saat nanti, kalau lo mau sih kalau gak mau yaudah</p>
+      <button class="button" onclick="nextPopup('popup5')">?????</button>
+    </div>
+  </div>
+
+  <div id="popup4B" class="popup">
+    <div class="popup-content">
+      <p>Hehehe, gue ngerasa nyaman bareng-bareng sama kamu akhir-akhir ini? Entah kamu notis atau tidak sewaktu gue tanya di base petrels waktu itu? Wkwkwk buat memastikan kalau kamu mungkin bisa gue gandeng suatu saat nanti, kalau kamu mau sih kalau gak mau yaudah mau gimana lagi kan?</p>
+      <button class="button" onclick="nextPopup('popup5')">?????</button>
+    </div>
+  </div>
+
+  <div id="popup5" class="popup">
+    <div class="popup-content">
+      <p>Di TL X gue lewat tadi, kalau misal gak ngerti materi kuliah itu gak papa asal gak HTS. Dan kalau pdkt kelamaan ntar kamu diambil orang gimana pet?? TERUS kalau pdkt sebulan ITU KITA UDAH MENSIVE SEKALI HARUSNYA (emot marah)</p>
+      <button class="button" onclick="nextPopup('popup6')">Jadi, mau apa?</button>
+    </div>
+  </div>
+
+  <div id="popup6" class="popup">
+    <div class="popup-content">
+      <p>Jadi? Would you fill in the missing pieces of my story? Would you let me give you so much of my time? Would you be the one to watch the waves with me someday? Petya Marlene, will you be mine?</p>
+      <button class="button" onclick="yesAnswer()">Yes</button>
+      <button class="button red" onclick="sorryAnswer()">I'm sorry</button>
+    </div>
+  </div>
+
+  <!-- Warning Page -->
+  <div id="warning" class="warning-page">
+    <p>Oh yaudah! salah target</p>
+  </div>
+
+  <script>
+    // Fungsi menampilkan pop-up setelah loading
+    setTimeout(() => {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('popup1').style.display = 'flex';
+    }, 3000);
+
+    // Fungsi tombol "Iya"
+    function answerYes() {
+      nextPopup('popup2');
+    }
+
+    // Fungsi tombol "Tidak"
+    function showWarning() {
+      document.getElementById('popup1').style.display = 'none';
+      document.getElementById('warning').style.display = 'flex';
+    }
+
+    // Fungsi untuk berpindah ke pop-up berikutnya
+    function nextPopup(nextId) {
+      document.querySelector('.popup:not(.warning-page)').style.display = 'none';
+      document.getElementById(nextId).style.display = 'flex';
+    }
+
+    // Fungsi tombol "Yes"
+    function yesAnswer() {
+      window.location.href = "https://wa.me/message/2FJKFRQQIMOBC1";
+    }
+
+    // Fungsi tombol "I'm sorry"
+    function sorryAnswer() {
+      document.getElementById('popup6').style.display = 'none';
+      document.getElementById('warning').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
